@@ -1081,6 +1081,60 @@ function setupScrollIndicator() {
         }
 
         /* Promotional Footer */
+        /* Contact Buttons */
+.contact-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 1.5rem 0;
+}
+
+.contact-btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 40px;
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.email-btn {
+    background: var(--cream);
+    color: var(--burgundy);
+}
+
+.email-btn:hover {
+    background: transparent;
+    border-color: var(--cream);
+    color: var(--cream);
+    transform: translateY(-3px);
+}
+
+.whatsapp-btn {
+    background: #25D366;
+    color: white;
+}
+
+.whatsapp-btn:hover {
+    background: transparent;
+    border-color: #25D366;
+    color: #25D366;
+    transform: translateY(-3px);
+}
+
+/* Visitor Badge */
+.visitor-badge {
+    margin: 1rem 0;
+}
+
+.visitor-badge img {
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
         .promo-footer {
             background: linear-gradient(135deg, var(--burgundy), #6a0f1e);
             color: white;
@@ -1213,12 +1267,12 @@ function setupScrollIndicator() {
                 <div class="letter-content">
                     <div class="letter-header">
                         <h2 class="letter-title">My Dearest Loved Ones,</h2>
-                        <div class="letter-date">February 14th, 2024</div>
+                        <div class="letter-date">February 14th, 2026</div>
                     </div>
 
                     <div class="letter-body">
                         <p class="letter-paragraph typing-line" id="line1">
-                            As <span class="highlighted-word">Valentine's Day</span> wraps the world in shades of red and pink, I find myself thinking not just of romantic love, but of all the beautiful forms of love that grace my life. Today, I want to celebrate <span class="highlighted-word">you</span>—the friends and family who make my world brighter simply by being in it.
+                            As <span class="highlighted-word">Valentine's Day</span> wraps the world in shades of red and pink, I find myself thinking not just of romantic love, but of all the beautiful forms of love that grace my life. Today, I want to celebrate <span class="highlighted-word">you</span>—the family and friends who make my world brighter simply by being in it.
                         </p>
 
                         <p class="letter-paragraph typing-line" id="line2">
@@ -1358,16 +1412,33 @@ function setupScrollIndicator() {
         </div>
     </section>
 
-    <!-- ===== PROMOTIONAL FOOTER ===== -->
-    <footer class="promo-footer">
-        <div class="footer-content">
-            <p>💌 Loved this experience? Create your own for <strong>Birthdays, Anniversaries, Events & more!</strong></p>
-            <p>Custom interactive invitations with personalized games and letters.</p>
-            <a href="#" class="footer-btn">✨ Inquire Now ✨</a>
-            <p class="footer-note">© 2026 PlanetOlu. Spread the love.</p>
+   <!-- ===== PROMOTIONAL FOOTER ===== -->
+<footer class="promo-footer">
+    <div class="footer-content">
+        <p>💌 Loved this experience? Create your own for <strong>Birthdays, Anniversaries, Events & more!</strong></p>
+        <p>Custom interactive invitations with personalized games and letters.</p>
+        
+        <!-- Contact Buttons (Email & WhatsApp) -->
+        <div class="contact-buttons">
+            <a href="oluwamodupeabimbola@gmail.com" class="contact-btn email-btn" target="_blank">
+                📧 Email Me
+            </a>
+            <a href="https://wa.me/09020347882?text=Hi!%20I%20loved%20your%20Valentine%27s%20page!" 
+               class="contact-btn whatsapp-btn" target="_blank">
+                💬 WhatsApp
+            </a>
         </div>
-    </footer>
-
+        
+        <!-- Visitor Badge (Shows page views) -->
+        <div class="visitor-badge">
+            <img src="https://visitor-badge.laobi.icu/badge?page_id=planetolu-valentine-2026" 
+                 alt="Visitor Count" 
+                 style="border-radius: 20px; margin-top: 1rem;">
+        </div>
+        
+        <p class="footer-note">© 2026 PlanetOlu. Spread the love.</p>
+    </div>
+</footer>
     <!-- Scroll Indicator -->
     <div class="scroll-indicator" id="scrollIndicator">
         <div>↓ Scroll for more magic ↓</div>
@@ -2278,3 +2349,4 @@ function setupScrollIndicator() {
     </script>
 </body>
 </html>
+
