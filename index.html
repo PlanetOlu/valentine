@@ -1,0 +1,2280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dearest | A Valentine's Letter</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Cormorant+Garamond:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --cream: #FFFBF5;
+            --blush: #FFE8E8;
+            --gold: #D4AF37;
+            --burgundy: #8B2635;
+            --rose: #E6BCCD;
+            --charcoal: #2D3142;
+            --shadow: rgba(45, 49, 66, 0.1);
+            --sapphire: #1C3A6F; /* added for games */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, var(--cream) 0%, #FFE5EC 100%);
+            color: var(--charcoal);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        /* Magic Opening Animation */
+        .magic-opening {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--burgundy), var(--rose));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease;
+        }
+
+        .magic-heart {
+            width: 100px;
+            height: 100px;
+            background: var(--cream);
+            position: relative;
+            transform: rotate(45deg);
+            animation: heartbeat 1.2s infinite;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+        }
+
+        .magic-heart:before,
+        .magic-heart:after {
+            content: '';
+            width: 100px;
+            height: 100px;
+            background: var(--cream);
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .magic-heart:before {
+            top: -50px;
+            left: 0;
+        }
+
+        .magic-heart:after {
+            top: 0;
+            left: -50px;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: rotate(45deg) scale(1); }
+            50% { transform: rotate(45deg) scale(1.1); }
+        }
+
+        .opening-text {
+            color: var(--cream);
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            margin-top: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInOut 3s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* Storytelling Intro */
+        .story-intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000 0%, #2c0b0e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 900;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+            padding: 2rem;
+        }
+
+        .story-text {
+            color: var(--cream);
+            font-size: 1.8rem;
+            text-align: center;
+            max-width: 800px;
+            line-height: 1.6;
+            font-family: 'Playfair Display', serif;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .continue-prompt {
+            position: absolute;
+            bottom: 3rem;
+            color: var(--gold);
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: pulse 2s infinite;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Main Content */
+        .main-content {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            color: var(--burgundy);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--charcoal);
+            margin-top: 2rem;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        /* Floating Envelope */
+        .envelope-floating {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 3rem auto;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            animation: floatEnvelope 6s ease-in-out infinite;
+        }
+
+        @keyframes floatEnvelope {
+            0%, 100% { transform: translateY(0) rotateX(5deg); }
+            50% { transform: translateY(-20px) rotateX(-5deg); }
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .envelope-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #fffaf0, #f8f0e3);
+            border-radius: 8px;
+            box-shadow: 
+                0 20px 40px rgba(0,0,0,0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+                0 0 20px rgba(212, 175, 55, 0.1) inset;
+            transform: translateZ(0);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #f8f0e3, #f0e6d4);
+            border-radius: 8px;
+            clip-path: polygon(0 0, 100% 0, 50% 50%);
+            transform-origin: top;
+            transform: rotateX(0deg);
+            box-shadow: 0 -10px 20px rgba(0,0,0,0.1);
+            z-index: 2;
+            transition: transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .wax-seal {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 30% 30%, var(--burgundy), #6a0f1e);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 10px 30px rgba(139, 38, 53, 0.4),
+                inset 0 2px 0 rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: sealGlow 3s infinite;
+        }
+
+        @keyframes sealGlow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(139, 38, 53, 0.4); }
+            50% { box-shadow: 0 15px 40px rgba(139, 38, 53, 0.6); }
+        }
+
+        .wax-seal:hover {
+            transform: translate(-50%, -50%) scale(1.15);
+        }
+
+        .seal-initial {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--gold);
+        }
+
+        /* LETTER FIX: Container will expand to full width when revealed */
+        .letter-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 90vw;
+            max-width: 800px;
+            height: auto;
+            z-index: 1000;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.8);
+            pointer-events: none;
+            transition: all 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        /* LETTER FIX: Letter will be full width and properly sized */
+        .letter {
+            position: relative;
+            width: 100%;
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 
+                0 30px 60px rgba(0,0,0,0.3),
+                0 0 0 1px rgba(212, 175, 55, 0.1);
+            transform-origin: center;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: all 1s ease 0.5s;
+            border: 1px solid rgba(230, 188, 205, 0.3);
+            /* Paper texture */
+            background-image: 
+                linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+                linear-gradient(#eee .1em, transparent .1em);
+            background-size: 100% 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .letter.revealed {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .letter-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Letter Typing Effect */
+        .typing-line {
+            opacity: 0;
+            transform: translateY(20px);
+            margin-bottom: 1.5rem;
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .letter-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--burgundy);
+            margin-bottom: 0.5rem;
+        }
+
+        .letter-date {
+            font-family: 'Playfair Display', serif;
+            color: var(--charcoal);
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .letter-body {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--charcoal);
+            margin: 2rem 0;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .letter-paragraph {
+            margin-bottom: 2rem;
+            text-align: left;
+            position: relative;
+        }
+
+        .letter-paragraph:first-letter {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--burgundy);
+            float: left;
+            margin-right: 8px;
+            margin-top: 4px;
+        }
+
+        .highlighted-word {
+            background: linear-gradient(120deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.1) 100%);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+            color: var(--burgundy);
+        }
+
+        /* Valentine Question - Enhanced */
+        .valentine-question {
+            background: linear-gradient(135deg, rgba(255, 232, 232, 0.9), rgba(255, 245, 245, 0.9));
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 3rem auto;
+            width: 100%;
+            max-width: 600px;
+            border: 2px solid var(--rose);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .valentine-question:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, var(--rose), var(--burgundy), var(--rose));
+        }
+
+        .question-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: var(--burgundy);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .question-subtitle {
+            font-size: 1.2rem;
+            color: var(--charcoal);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .question-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .heart-option {
+            padding: 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .heart-yes {
+            background: linear-gradient(135deg, var(--burgundy), #b02035);
+            color: white;
+            box-shadow: 0 10px 20px rgba(139, 38, 53, 0.3);
+        }
+
+        .heart-no {
+            background: linear-gradient(135deg, #4a69bd, #6a89cc);
+            color: white;
+            box-shadow: 0 10px 20px rgba(74, 105, 189, 0.3);
+        }
+
+        .heart-option:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .heart-option:active {
+            transform: translateY(-2px);
+        }
+
+        .heart-emoji {
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .heart-option:hover .heart-emoji {
+            transform: scale(1.3);
+        }
+
+        .response-area {
+            margin-top: 2rem;
+            padding: 2rem;
+            border-radius: 12px;
+            background: white;
+            display: none;
+            animation: slideIn 0.5s ease;
+            border-left: 5px solid var(--gold);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .response-text {
+            font-size: 1.3rem;
+            color: var(--charcoal);
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* Signature */
+        .letter-signature {
+            text-align: right;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--gold);
+            opacity: 0;
+            transform: translateY(20px);
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .signature-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: var(--burgundy);
+            margin-bottom: 0.5rem;
+        }
+
+        .signature-date {
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            font-style: italic;
+        }
+
+        // Scroll indicator interaction - UPDATED to hide when footer is visible
+function setupScrollIndicator() {
+    const scrollIndicator = document.getElementById('scrollIndicator');
+    const footer = document.querySelector('.promo-footer'); // The new footer
+
+    scrollIndicator.addEventListener('click', () => {
+        gsap.to(window, {
+            duration: 1.5,
+            scrollTo: {
+                y: document.documentElement.scrollHeight,
+                offsetY: 0
+            },
+            ease: "power2.inOut"
+        });
+    });
+
+    // Function to update indicator visibility based on scroll and footer position
+    function updateIndicatorVisibility() {
+        if (!footer) return; // Footer might not exist yet
+
+        const footerRect = footer.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Check if footer is visible in the viewport (any part)
+        const isFooterVisible = footerRect.top < windowHeight && footerRect.bottom > 0;
+
+        // Hide indicator if footer is visible
+        if (isFooterVisible) {
+            gsap.to(scrollIndicator, {
+                opacity: 0,
+                duration: 0.3,
+                ease: "power2.out",
+                onComplete: () => {
+                    scrollIndicator.style.pointerEvents = 'none';
+                }
+            });
+        } else {
+            // Only show if not hidden by footer
+            gsap.to(scrollIndicator, {
+                opacity: 1,
+                duration: 0.3,
+                ease: "power2.out",
+                onComplete: () => {
+                    scrollIndicator.style.pointerEvents = 'auto';
+                }
+            });
+        }
+    }
+
+    // Debounced scroll handler for performance
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        // First, quickly fade indicator slightly during scroll
+        scrollIndicator.style.opacity = '0.5';
+        
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            // After scrolling stops, check footer visibility
+            updateIndicatorVisibility();
+        }, 150);
+    });
+
+    // Initial check on page load
+    setTimeout(updateIndicatorVisibility, 1000); // Delay to ensure footer is rendered
+}
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Decorative Elements */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-heart {
+            position: absolute;
+            opacity: 0.3;
+            animation: float 20s infinite linear;
+            font-size: 24px;
+            color: var(--rose);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        /* Cursor Effect */
+        .magic-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+
+            .letter {
+                padding: 2rem;
+                width: 95vw;
+                max-width: 95vw;
+            }
+
+            .letter-container {
+                width: 95vw;
+            }
+
+            .letter-title {
+                font-size: 2.8rem;
+            }
+
+            .question-options {
+                grid-template-columns: 1fr;
+            }
+
+            .envelope-floating {
+                width: 250px;
+                height: 170px;
+            }
+
+            .letter-body {
+                font-size: 1.1rem;
+                line-height: 1.6;
+            }
+
+            .letter-paragraph:first-letter {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+
+            .letter {
+                padding: 1.5rem;
+            }
+
+            .letter-body {
+                font-size: 1rem;
+            }
+
+            .opening-text {
+                font-size: 2rem;
+            }
+
+            .letter-title {
+                font-size: 2.3rem;
+            }
+        }
+
+        /* FIX: Make envelope background fade when letter appears */
+        .envelope-floating.faded {
+            opacity: 0.3;
+            filter: blur(2px);
+            transition: all 1s ease;
+        }
+
+        /* FIX: Allow interaction with letter when it's revealed */
+        .letter-container.visible {
+            pointer-events: all;
+        }
+        /* FIX: Adjust letter position to show top */
+.letter-container {
+    top: 80px !important; /* Show from 80px from top */
+    transform: translate(-50%, 0) scale(0.8) !important;
+    max-height: 85vh !important;
+}
+
+.letter-container.visible {
+    transform: translate(-50%, 0) scale(1) !important;
+}
+
+.letter {
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+    margin-top: 20px !important;
+}
+
+/* On mobile, adjust further */
+@media (max-width: 768px) {
+    .letter-container {
+        top: 40px !important;
+        max-height: 90vh !important;
+    }
+    
+    .letter {
+        max-height: 85vh !important;
+    }
+}
+/* FIX: Perfect drop cap alignment */
+.letter-paragraph:first-letter {
+    float: left;
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    color: var(--burgundy);
+    margin-right: 12px;
+    margin-top: 10px;
+    margin-bottom: -5px;
+    line-height: 0.75;
+    vertical-align: text-top;
+    display: inline-block;
+}
+
+/* On mobile, adjust drop cap size */
+@media (max-width: 768px) {
+    .letter-paragraph:first-letter {
+        font-size: 2.8rem;
+        margin-top: 8px;
+        margin-right: 8px;
+        line-height: 0.8;
+    }
+}
+
+@media (max-width: 480px) {
+    .letter-paragraph:first-letter {
+        font-size: 2.2rem;
+        margin-top: 6px;
+        margin-right: 6px;
+    }
+}
+        /* ===== GAME STYLES ===== */
+        .games-section {
+            max-width: 1000px;
+            margin: 5rem auto;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(255, 232, 232, 0.8), rgba(255, 245, 245, 0.8));
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid var(--rose);
+            position: relative;
+            z-index: 50;
+            backdrop-filter: blur(5px);
+        }
+
+        .section-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--burgundy);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .games-intro {
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--charcoal);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .game-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .game-tab {
+            padding: 1rem 2rem;
+            border: 2px solid var(--burgundy);
+            background: transparent;
+            border-radius: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--burgundy);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .game-tab.active {
+            background: var(--burgundy);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(139, 38, 53, 0.3);
+        }
+
+        .game-tab:hover {
+            background: var(--burgundy);
+            color: white;
+        }
+
+        .game-container {
+            min-height: 400px;
+        }
+
+        .game {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .game.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--rose);
+        }
+
+        .stat {
+            font-size: 1.3rem;
+            color: var(--charcoal);
+        }
+
+        .stat span {
+            font-weight: 700;
+            color: var(--burgundy);
+            font-size: 1.5rem;
+        }
+
+        /* Memory Game */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--rose), var(--blush));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .memory-card.flipped {
+            background: linear-gradient(135deg, var(--burgundy), #b03040);
+            transform: rotateY(180deg);
+        }
+
+        .memory-card.matched {
+            background: linear-gradient(135deg, var(--gold), #e6b800);
+            cursor: default;
+            opacity: 0.7;
+        }
+
+        /* Word Scramble */
+        .scramble-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            border: 2px solid var(--rose);
+        }
+
+        .scrambled-word {
+            font-size: 3rem;
+            letter-spacing: 10px;
+            color: var(--burgundy);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            word-break: break-all;
+        }
+
+        .scramble-input {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.5rem;
+            text-align: center;
+            border: 3px solid var(--rose);
+            border-radius: 10px;
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 1rem;
+        }
+
+        .scramble-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .hint {
+            font-size: 1.2rem;
+            color: var(--sapphire);
+            font-style: italic;
+            min-height: 2rem;
+        }
+
+        /* Puzzle Game */
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            background: white;
+            padding: 10px;
+            border-radius: 15px;
+            border: 2px solid var(--rose);
+        }
+
+        .puzzle-piece {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--blush), var(--cream));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--rose);
+        }
+
+        .puzzle-piece.empty {
+            background: transparent;
+            cursor: default;
+            border: 2px dashed var(--rose);
+        }
+
+        .puzzle-piece:hover:not(.empty) {
+            transform: scale(1.05);
+            background: var(--rose);
+        }
+
+        /* Game Controls */
+        .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .game-btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .start-btn {
+            background: var(--burgundy);
+            color: white;
+        }
+
+        .start-btn:hover {
+            background: #a03045;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(139, 38, 53, 0.3);
+        }
+
+        .reset-btn {
+            background: var(--sapphire);
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: #2a4a8f;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(28, 58, 111, 0.3);
+        }
+
+        .game-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Game Result */
+        .game-result {
+            display: none;
+            margin-top: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid var(--gold);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-result h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--burgundy);
+            margin-bottom: 1rem;
+        }
+
+        .game-result p {
+            font-size: 1.3rem;
+            margin: 0.5rem 0;
+        }
+
+        .game-result span {
+            font-weight: 700;
+            color: var(--sapphire);
+            font-size: 1.5rem;
+        }
+
+        /* Promotional Footer */
+        .promo-footer {
+            background: linear-gradient(135deg, var(--burgundy), #6a0f1e);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+            z-index: 50;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .promo-footer p {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .promo-footer strong {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .footer-btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--gold);
+            color: var(--burgundy);
+            text-decoration: none;
+            border-radius: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 1.5rem 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border: 2px solid var(--gold);
+        }
+
+        .footer-btn:hover {
+            background: transparent;
+            color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .footer-note {
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .memory-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.8rem;
+            }
+            
+            .game-tab {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            .game-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .memory-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .scrambled-word {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Magic Opening Screen -->
+    <div class="magic-opening" id="magicOpening">
+        <div class="magic-heart" id="magicHeart"></div>
+        <div class="opening-text">Touch the heart to begin...</div>
+    </div>
+
+    <!-- Storytelling Intro -->
+    <div class="story-intro" id="storyIntro">
+        <div class="story-text" id="storyText">
+            Somewhere, in the quiet spaces between our daily lives,<br>
+            there exists a place where words become feelings,<br>
+            and feelings become memories...
+        </div>
+        <div class="continue-prompt" id="continuePrompt">Continue →</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="hero-title">A Letter for You</h1>
+            <p class="hero-subtitle" id="heroSubtitle">A special Valentine's message for those who light up my world</p>
+        </div>
+
+        <!-- Floating Envelope -->
+        <div class="envelope-floating" id="envelopeFloating">
+            <div class="envelope-wrapper">
+                <div class="envelope-body"></div>
+                <div class="envelope-flap" id="envelopeFlap"></div>
+                <div class="wax-seal" id="waxSeal">
+                    <div class="seal-initial">❤</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Letter Container - NOW SEPARATE FROM ENVELOPE -->
+        <div class="letter-container" id="letterContainer">
+            <div class="letter" id="letter">
+                <div class="letter-content">
+                    <div class="letter-header">
+                        <h2 class="letter-title">My Dearest Loved Ones,</h2>
+                        <div class="letter-date">February 14th, 2024</div>
+                    </div>
+
+                    <div class="letter-body">
+                        <p class="letter-paragraph typing-line" id="line1">
+                            As <span class="highlighted-word">Valentine's Day</span> wraps the world in shades of red and pink, I find myself thinking not just of romantic love, but of all the beautiful forms of love that grace my life. Today, I want to celebrate <span class="highlighted-word">you</span>—the friends and family who make my world brighter simply by being in it.
+                        </p>
+
+                        <p class="letter-paragraph typing-line" id="line2">
+                            Love, in its truest form, isn't confined to grand gestures or fairy-tale endings. It's in the <span class="highlighted-word">everyday moments</span>: the shared laughter over a silly joke, the comfort of a familiar voice on a difficult day, the warmth of knowing someone truly sees you and cherishes you exactly as you are.
+                        </p>
+
+                        <p class="letter-paragraph typing-line" id="line3">
+                            Whether you're celebrating with a special someone, enjoying the company of good friends, or embracing the peace of your own wonderful company, know that you are <span class="highlighted-word">deeply valued</span>. Your kindness, your humor, your strength—all these things make the people around you better, and I'm so grateful to be among them.
+                        </p>
+
+                        <!-- Valentine Question -->
+                        <div class="valentine-question" id="valentineQuestion">
+                            <h3 class="question-title">A Valentine's Curiosity</h3>
+                            <p class="question-subtitle">Where does your heart find itself this season?</p>
+                            
+                            <div class="question-options">
+                                <button class="heart-option heart-yes" id="yesOption">
+                                    <span class="heart-emoji">💝</span>
+                                    Wrapped in Love
+                                </button>
+                                <button class="heart-option heart-no" id="noOption">
+                                    <span class="heart-emoji">✨</span>
+                                    Open to Magic
+                                </button>
+                            </div>
+                            
+                            <div class="response-area" id="responseArea">
+                                <p class="response-text" id="responseText"></p>
+                            </div>
+                        </div>
+
+                        <p class="letter-paragraph typing-line" id="line4">
+                            This Valentine's Day, I hope you feel the <span class="highlighted-word">love you give</span> returning to you multiplied. I hope you treat yourself with the same tenderness you offer others. And I hope you remember that your presence in this world is a gift that keeps on giving.
+                        </p>
+
+                        <p class="letter-paragraph typing-line" id="line5">
+                            Thank you for being part of my story. Thank you for the memories we've made and those yet to come. Thank you for simply being <span class="highlighted-word">you</span>.
+                        </p>
+                    </div>
+
+                    <div class="letter-signature" id="letterSignature">
+                        <div class="signature-name">With all my love,</div>
+                        <div class="signature-date">Your Valentine (A.O)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p style="margin-top: 3rem; color: var(--burgundy); font-size: 1.1rem; text-align: center; opacity: 0;" id="scrollPrompt">
+            The story continues below...
+        </p>
+    </div>
+
+    <!-- ===== GAMES SECTION ===== -->
+    <section class="games-section" id="gamesSection">
+        <h2 class="section-title">Valentine's Diversions</h2>
+        <p class="games-intro">Test your wits with these timed challenges. Complete before time runs out!</p>
+        
+        <!-- Game Tabs -->
+        <div class="game-tabs">
+            <button class="game-tab active" data-game="memory">Memory Match</button>
+            <button class="game-tab" data-game="scramble">Word Scramble</button>
+            <button class="game-tab" data-game="puzzle">Heart Puzzle</button>
+        </div>
+        
+        <!-- Game Container -->
+        <div class="game-container">
+            <!-- Game 1: Memory Match -->
+            <div class="game active" id="gameMemory">
+                <div class="game-header">
+                    <div class="stat">⏱️ <span id="memoryTime">60</span>s</div>
+                    <div class="stat">🎯 Moves: <span id="memoryMoves">0</span></div>
+                    <div class="stat">❤️ Matches: <span id="memoryMatches">0</span>/8</div>
+                </div>
+                
+                <div class="memory-grid" id="memoryGrid"></div>
+                
+                <div class="game-controls">
+                    <button class="game-btn start-btn" id="memoryStart">Start Game</button>
+                    <button class="game-btn reset-btn" id="memoryReset">Reset</button>
+                </div>
+                
+                <div class="game-result" id="memoryResult">
+                    <h3>✨ Game Complete!</h3>
+                    <p>Score: <span id="memoryScore">0</span></p>
+                    <p>Time: <span id="memoryFinalTime">0</span>s | Moves: <span id="memoryFinalMoves">0</span></p>
+                </div>
+            </div>
+            
+            <!-- Game 2: Word Scramble -->
+            <div class="game" id="gameScramble">
+                <div class="game-header">
+                    <div class="stat">⏱️ <span id="scrambleTime">90</span>s</div>
+                    <div class="stat">🎯 Score: <span id="scrambleScore">0</span></div>
+                    <div class="stat">📝 Words: <span id="scrambleWords">0</span>/10</div>
+                </div>
+                
+                <div class="scramble-box">
+                    <div class="scrambled-word" id="scrambledWord"></div>
+                    <input type="text" class="scramble-input" id="scrambleInput" placeholder="Type the word..." disabled>
+                    <div class="hint" id="scrambleHint"></div>
+                </div>
+                
+                <div class="game-controls">
+                    <button class="game-btn start-btn" id="scrambleStart">Start Game</button>
+                    <button class="game-btn reset-btn" id="scrambleReset">Reset</button>
+                </div>
+                
+                <div class="game-result" id="scrambleResult">
+                    <h3>✨ Game Complete!</h3>
+                    <p>Score: <span id="scrambleFinalScore">0</span></p>
+                    <p>Words Solved: <span id="scrambleFinalWords">0</span>/10</p>
+                </div>
+            </div>
+            
+            <!-- Game 3: Heart Puzzle -->
+            <div class="game" id="gamePuzzle">
+                <div class="game-header">
+                    <div class="stat">⏱️ <span id="puzzleTime">120</span>s</div>
+                    <div class="stat">🎯 Moves: <span id="puzzleMoves">0</span></div>
+                    <div class="stat">🧩 Status: <span id="puzzleStatus">Unsolved</span></div>
+                </div>
+                
+                <div class="puzzle-grid" id="puzzleGrid"></div>
+                
+                <div class="game-controls">
+                    <button class="game-btn start-btn" id="puzzleStart">Start Game</button>
+                    <button class="game-btn reset-btn" id="puzzleReset">Reset</button>
+                </div>
+                
+                <div class="game-result" id="puzzleResult">
+                    <h3>✨ Puzzle Solved!</h3>
+                    <p>Score: <span id="puzzleScore">0</span></p>
+                    <p>Time: <span id="puzzleFinalTime">0</span>s | Moves: <span id="puzzleFinalMoves">0</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROMOTIONAL FOOTER ===== -->
+    <footer class="promo-footer">
+        <div class="footer-content">
+            <p>💌 Loved this experience? Create your own for <strong>Birthdays, Anniversaries, Events & more!</strong></p>
+            <p>Custom interactive invitations with personalized games and letters.</p>
+            <a href="#" class="footer-btn">✨ Inquire Now ✨</a>
+            <p class="footer-note">© 2026 PlanetOlu. Spread the love.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator">
+        <div>↓ Scroll for more magic ↓</div>
+    </div>
+
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Magic Cursor -->
+    <div class="magic-cursor" id="magicCursor"></div>
+
+    <script>
+        // Initialize GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Create floating hearts
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const heartCount = 15;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = '❤';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.fontSize = `${20 + Math.random() * 30}px`;
+                heart.style.animationDelay = `${Math.random() * 10}s`;
+                heart.style.animationDuration = `${15 + Math.random() * 15}s`;
+                container.appendChild(heart);
+            }
+        }
+
+        // Magic cursor effect
+        function setupMagicCursor() {
+            const cursor = document.getElementById('magicCursor');
+            
+            document.addEventListener('mousemove', (e) => {
+                gsap.to(cursor, {
+                    x: e.clientX,
+                    y: e.clientY,
+                    duration: 0.1
+                });
+            });
+
+            // Hide cursor on touch devices
+            if ('ontouchstart' in window) {
+                cursor.style.display = 'none';
+            }
+        }
+
+        // Storytelling sequence
+        function startStorySequence() {
+            const magicOpening = document.getElementById('magicOpening');
+            const storyIntro = document.getElementById('storyIntro');
+            const storyText = document.getElementById('storyText');
+            const continuePrompt = document.getElementById('continuePrompt');
+            const mainContent = document.getElementById('mainContent');
+            const heroSubtitle = document.getElementById('heroSubtitle');
+            const scrollPrompt = document.getElementById('scrollPrompt');
+
+            // Step 1: Click heart to begin
+            document.getElementById('magicHeart').addEventListener('click', () => {
+                // Pulse heart animation
+                gsap.to('.magic-heart', {
+                    scale: 1.5,
+                    duration: 0.5,
+                    ease: "back.out(1.7)"
+                });
+
+                // Create heart particles
+                createHeartExplosion(document.getElementById('magicHeart'));
+
+                // Fade out opening screen
+                gsap.to(magicOpening, {
+                    opacity: 0,
+                    duration: 1,
+                    delay: 0.5,
+                    onComplete: () => {
+                        magicOpening.style.display = 'none';
+                        
+                        // Show story intro
+                        storyIntro.style.pointerEvents = 'all';
+                        gsap.to(storyIntro, {
+                            opacity: 1,
+                            duration: 1
+                        });
+
+                        // Animate story text
+                        gsap.to(storyText, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 2,
+                            delay: 0.5,
+                            ease: "power2.out"
+                        });
+
+                        // Show continue prompt
+                        setTimeout(() => {
+                            gsap.to(continuePrompt, {
+                                opacity: 1,
+                                duration: 1
+                            });
+                        }, 3000);
+                    }
+                });
+            });
+
+            // Step 2: Continue to main content
+            continuePrompt.addEventListener('click', () => {
+                // Fade out story intro
+                gsap.to(storyIntro, {
+                    opacity: 0,
+                    duration: 1,
+                    onComplete: () => {
+                        storyIntro.style.display = 'none';
+                        
+                        // Show main content
+                        gsap.to(mainContent, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 1.5,
+                            ease: "power2.out"
+                        });
+
+                        // Animate hero subtitle
+                        gsap.to(heroSubtitle, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 1,
+                            delay: 0.5
+                        });
+
+                        // Show scroll prompt
+                        setTimeout(() => {
+                            gsap.to(scrollPrompt, {
+                                opacity: 1,
+                                duration: 1
+                            });
+                        }, 2000);
+                    }
+                });
+            });
+        }
+
+        function createHeartExplosion(element) {
+            const rect = element.getBoundingClientRect();
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.style.position = 'fixed';
+                heart.style.fontSize = '24px';
+                heart.style.zIndex = '1001';
+                heart.style.color = '#FF4D6D';
+                heart.style.pointerEvents = 'none';
+                heart.style.left = `${rect.left + rect.width/2}px`;
+                heart.style.top = `${rect.top + rect.height/2}px`;
+                
+                document.body.appendChild(heart);
+                
+                gsap.to(heart, {
+                    x: gsap.utils.random(-200, 200),
+                    y: gsap.utils.random(-200, 200),
+                    opacity: 0,
+                    scale: gsap.utils.random(1.5, 2.5),
+                    rotation: gsap.utils.random(0, 360),
+                    duration: 2,
+                    ease: "power2.out",
+                    onComplete: () => heart.remove()
+                });
+            }
+        }
+
+        // Envelope interaction - FIXED VERSION
+        function setupEnvelopeInteraction() {
+            const waxSeal = document.getElementById('waxSeal');
+            const envelopeFlap = document.getElementById('envelopeFlap');
+            const letterContainer = document.getElementById('letterContainer');
+            const letter = document.getElementById('letter');
+            const envelopeFloating = document.getElementById('envelopeFloating');
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            const valentineQuestion = document.getElementById('valentineQuestion');
+            const letterSignature = document.getElementById('letterSignature');
+            const typingLines = document.querySelectorAll('.typing-line');
+
+            waxSeal.addEventListener('click', () => {
+                // Break seal animation
+                gsap.to(waxSeal, {
+                    scale: 0,
+                    duration: 0.5,
+                    ease: "back.in(2)"
+                });
+
+                // Create seal break particles
+                createSealBreakParticles();
+
+                // Open envelope flap
+                setTimeout(() => {
+                    envelopeFlap.style.transform = 'rotateX(-180deg)';
+                    
+                    // Fade envelope into background
+                    envelopeFloating.classList.add('faded');
+                    
+                    // Show letter container
+                    letterContainer.classList.add('visible');
+                    
+                    // Animate letter container into view
+                    gsap.to(letterContainer, {
+                        opacity: 1,
+                        scale: 1,
+                        y: 0,
+                        duration: 1.5,
+                        ease: "back.out(1.7)",
+                        onComplete: () => {
+                            // Show letter
+                            letter.classList.add('revealed');
+                            
+                            // Animate typing lines one by one
+                            typingLines.forEach((line, index) => {
+                                gsap.to(line, {
+                                    opacity: 1,
+                                    y: 0,
+                                    duration: 1,
+                                    delay: index * 0.5,
+                                    ease: "power2.out"
+                                });
+                            });
+
+                            // Show Valentine question
+                            setTimeout(() => {
+                                gsap.to(valentineQuestion, {
+                                    opacity: 1,
+                                    y: 0,
+                                    duration: 1,
+                                    ease: "power2.out"
+                                });
+                            }, typingLines.length * 500 + 500);
+
+                            // Show signature
+                            setTimeout(() => {
+                                gsap.to(letterSignature, {
+                                    opacity: 1,
+                                    y: 0,
+                                    duration: 1,
+                                    ease: "power2.out"
+                                });
+                            }, typingLines.length * 500 + 1000);
+
+                            // Show scroll indicator
+                            setTimeout(() => {
+                                gsap.to(scrollIndicator, {
+                                    opacity: 1,
+                                    duration: 1
+                                });
+                            }, typingLines.length * 500 + 1500);
+                        }
+                    });
+                }, 300);
+            });
+        }
+
+        function createSealBreakParticles() {
+            const seal = document.getElementById('waxSeal');
+            const symbols = ['❤', '💖', '💝', '✨', '🌟'];
+            
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+                particle.style.position = 'fixed';
+                particle.style.fontSize = '20px';
+                particle.style.zIndex = '1000';
+                particle.style.pointerEvents = 'none';
+                
+                const rect = seal.getBoundingClientRect();
+                particle.style.left = `${rect.left + rect.width/2}px`;
+                particle.style.top = `${rect.top + rect.height/2}px`;
+                
+                document.body.appendChild(particle);
+                
+                gsap.to(particle, {
+                    x: gsap.utils.random(-150, 150),
+                    y: gsap.utils.random(-150, 150),
+                    opacity: 0,
+                    scale: gsap.utils.random(1.5, 2.5),
+                    rotation: gsap.utils.random(0, 360),
+                    duration: 1.5,
+                    ease: "power2.out",
+                    onComplete: () => particle.remove()
+                });
+            }
+        }
+
+        // Valentine question interaction
+        function setupValentineQuestion() {
+            const yesOption = document.getElementById('yesOption');
+            const noOption = document.getElementById('noOption');
+            const responseArea = document.getElementById('responseArea');
+            const responseText = document.getElementById('responseText');
+
+            const responses = {
+                yes: [
+                    "How beautiful! May your Valentine's Day be filled with shared smiles, warm embraces, and the sweet certainty of being cherished. 💝",
+                    "Love's gentle glow surrounds you! Treasure these moments and may your connection deepen with each passing day. 🌹",
+                    "Your heart has found its home! May this Valentine's Day be just the beginning of countless beautiful moments together. 💕"
+                ],
+                no: [
+                    "How wonderful! An open heart is a beautiful canvas waiting for life's magic to paint upon it. Enjoy the journey! ✨",
+                    "Your independence is your strength! May this Valentine's Day remind you of your own wonderful company and the exciting possibilities ahead. 🌟",
+                    "The most beautiful love stories often begin with self-love. May you cherish yourself today and always. 💫"
+                ]
+            };
+
+            yesOption.addEventListener('click', () => {
+                showResponse(responses.yes[Math.floor(Math.random() * responses.yes.length)]);
+                createHeartEffect(yesOption);
+            });
+
+            noOption.addEventListener('click', () => {
+                showResponse(responses.no[Math.floor(Math.random() * responses.no.length)]);
+                createStarEffect(noOption);
+            });
+
+            function showResponse(message) {
+                responseText.textContent = message;
+                responseArea.style.display = 'block';
+                
+                // Animate response area
+                gsap.fromTo(responseArea,
+                    { opacity: 0, y: 20 },
+                    { opacity: 1, y: 0, duration: 0.5 }
+                );
+            }
+
+            function createHeartEffect(element) {
+                for (let i = 0; i < 10; i++) {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤';
+                    heart.style.position = 'fixed';
+                    heart.style.fontSize = '20px';
+                    heart.style.zIndex = '1000';
+                    heart.style.pointerEvents = 'none';
+                    
+                    const rect = element.getBoundingClientRect();
+                    heart.style.left = `${rect.left + rect.width/2}px`;
+                    heart.style.top = `${rect.top + rect.height/2}px`;
+                    
+                    document.body.appendChild(heart);
+                    
+                    gsap.to(heart, {
+                        x: gsap.utils.random(-100, 100),
+                        y: gsap.utils.random(-100, 100),
+                        opacity: 0,
+                        scale: 1.5,
+                        rotation: gsap.utils.random(-180, 180),
+                        duration: 1.2,
+                        ease: "power2.out",
+                        onComplete: () => heart.remove()
+                    });
+                }
+            }
+
+            function createStarEffect(element) {
+                for (let i = 0; i < 10; i++) {
+                    const star = document.createElement('div');
+                    star.innerHTML = '✨';
+                    star.style.position = 'fixed';
+                    star.style.fontSize = '20px';
+                    star.style.zIndex = '1000';
+                    star.style.pointerEvents = 'none';
+                    
+                    const rect = element.getBoundingClientRect();
+                    star.style.left = `${rect.left + rect.width/2}px`;
+                    star.style.top = `${rect.top + rect.height/2}px`;
+                    
+                    document.body.appendChild(star);
+                    
+                    gsap.to(star, {
+                        x: gsap.utils.random(-100, 100),
+                        y: gsap.utils.random(-100, 100),
+                        opacity: 0,
+                        scale: 1.5,
+                        rotation: gsap.utils.random(-180, 180),
+                        duration: 1.2,
+                        ease: "power2.out",
+                        onComplete: () => star.remove()
+                    });
+                }
+            }
+        }
+
+        // Scroll indicator interaction
+        function setupScrollIndicator() {
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            
+            scrollIndicator.addEventListener('click', () => {
+                gsap.to(window, {
+                    duration: 1.5,
+                    scrollTo: {
+                        y: document.documentElement.scrollHeight,
+                        offsetY: 0
+                    },
+                    ease: "power2.inOut"
+                });
+            });
+
+            // Hide scroll indicator when scrolling
+            let scrollTimeout;
+            window.addEventListener('scroll', () => {
+                scrollIndicator.style.opacity = '0.5';
+                
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    scrollIndicator.style.opacity = '1';
+                }, 500);
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            createFloatingHearts();
+            setupMagicCursor();
+            startStorySequence();
+            setupEnvelopeInteraction();
+            setupValentineQuestion();
+            setupScrollIndicator();
+
+            // Add subtle hover effect to envelope
+            const envelope = document.getElementById('envelopeFloating');
+            envelope.addEventListener('mouseenter', () => {
+                gsap.to(envelope, {
+                    scale: 1.05,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+
+            envelope.addEventListener('mouseleave', () => {
+                gsap.to(envelope, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+
+            // Reduce motion support
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                gsap.globalTimeline.timeScale(0.1);
+            }
+        });
+    </script>
+
+    <!-- Game Scripts -->
+    <script>
+        // Game Tab Switching
+        const tabs = document.querySelectorAll('.game-tab');
+        const games = document.querySelectorAll('.game');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const gameId = tab.getAttribute('data-game');
+                
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                games.forEach(game => {
+                    game.classList.remove('active');
+                    if (game.id === 'game' + gameId.charAt(0).toUpperCase() + gameId.slice(1)) {
+                        game.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Memory Game
+        class MemoryGame {
+            constructor() {
+                this.symbols = ['💍', '💎', '💐', '🌹', '🕯️', '📜', '✒️', '🎭'];
+                this.cards = [];
+                this.flipped = [];
+                this.matches = 0;
+                this.moves = 0;
+                this.timeLeft = 60;
+                this.gameActive = false;
+                this.timer = null;
+                this.grid = document.getElementById('memoryGrid');
+                this.timeSpan = document.getElementById('memoryTime');
+                this.movesSpan = document.getElementById('memoryMoves');
+                this.matchesSpan = document.getElementById('memoryMatches');
+                this.startBtn = document.getElementById('memoryStart');
+                this.resetBtn = document.getElementById('memoryReset');
+                this.resultDiv = document.getElementById('memoryResult');
+                this.scoreSpan = document.getElementById('memoryScore');
+                this.finalTimeSpan = document.getElementById('memoryFinalTime');
+                this.finalMovesSpan = document.getElementById('memoryFinalMoves');
+                
+                this.init();
+            }
+            
+            init() {
+                this.createGrid();
+                this.startBtn.addEventListener('click', () => this.startGame());
+                this.resetBtn.addEventListener('click', () => this.resetGame());
+            }
+            
+            createGrid() {
+                this.cards = [...this.symbols, ...this.symbols].sort(() => Math.random() - 0.5);
+                this.grid.innerHTML = '';
+                this.cards.forEach((symbol, idx) => {
+                    const card = document.createElement('div');
+                    card.className = 'memory-card';
+                    card.dataset.index = idx;
+                    card.dataset.symbol = symbol;
+                    card.textContent = '?';
+                    card.addEventListener('click', (e) => this.handleCardClick(e));
+                    this.grid.appendChild(card);
+                });
+            }
+            
+            handleCardClick(e) {
+                if (!this.gameActive) return;
+                const card = e.currentTarget;
+                if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
+                if (this.flipped.length >= 2) return;
+                
+                card.textContent = card.dataset.symbol;
+                card.classList.add('flipped');
+                this.flipped.push(card);
+                
+                if (this.flipped.length === 2) {
+                    this.moves++;
+                    this.movesSpan.textContent = this.moves;
+                    this.checkMatch();
+                }
+            }
+            
+            checkMatch() {
+                const [card1, card2] = this.flipped;
+                if (card1.dataset.symbol === card2.dataset.symbol) {
+                    card1.classList.add('matched');
+                    card2.classList.add('matched');
+                    this.matches++;
+                    this.matchesSpan.textContent = this.matches;
+                    this.flipped = [];
+                    
+                    if (this.matches === 8) this.endGame(true);
+                } else {
+                    setTimeout(() => {
+                        card1.textContent = '?';
+                        card2.textContent = '?';
+                        card1.classList.remove('flipped');
+                        card2.classList.remove('flipped');
+                        this.flipped = [];
+                    }, 1000);
+                }
+            }
+            
+            startGame() {
+                if (this.gameActive) return;
+                this.gameActive = true;
+                this.timeLeft = 60;
+                this.moves = 0;
+                this.matches = 0;
+                this.flipped = [];
+                this.movesSpan.textContent = '0';
+                this.matchesSpan.textContent = '0';
+                this.resultDiv.style.display = 'none';
+                this.startBtn.disabled = true;
+                
+                // Reset cards
+                const cards = document.querySelectorAll('.memory-card');
+                cards.forEach(card => {
+                    card.classList.remove('flipped', 'matched');
+                    card.textContent = '?';
+                });
+                
+                // Show briefly
+                cards.forEach(card => card.textContent = card.dataset.symbol);
+                setTimeout(() => {
+                    cards.forEach(card => {
+                        if (!card.classList.contains('matched')) card.textContent = '?';
+                    });
+                }, 2000);
+                
+                this.timer = setInterval(() => {
+                    this.timeLeft--;
+                    this.timeSpan.textContent = this.timeLeft;
+                    if (this.timeLeft <= 0) this.endGame(false);
+                }, 1000);
+            }
+            
+            endGame(success) {
+                clearInterval(this.timer);
+                this.gameActive = false;
+                this.startBtn.disabled = false;
+                
+                let score = success ? Math.max(1000 - this.moves * 10 - (60 - this.timeLeft) * 5, 100) : this.matches * 100;
+                this.scoreSpan.textContent = score;
+                this.finalTimeSpan.textContent = 60 - this.timeLeft;
+                this.finalMovesSpan.textContent = this.moves;
+                this.resultDiv.style.display = 'block';
+            }
+            
+            resetGame() {
+                clearInterval(this.timer);
+                this.gameActive = false;
+                this.startBtn.disabled = false;
+                this.timeLeft = 60;
+                this.moves = 0;
+                this.matches = 0;
+                this.flipped = [];
+                this.timeSpan.textContent = '60';
+                this.movesSpan.textContent = '0';
+                this.matchesSpan.textContent = '0';
+                this.resultDiv.style.display = 'none';
+                this.createGrid();
+            }
+        }
+
+        // Word Scramble Game
+        class ScrambleGame {
+            constructor() {
+                this.words = [
+                    { word: 'LOVE', hint: 'A deep affection' },
+                    { word: 'HEART', hint: 'Symbol of emotion' },
+                    { word: 'CUPID', hint: 'God of love' },
+                    { word: 'ROSES', hint: 'Valentine flower' },
+                    { word: 'SWEET', hint: 'Endearing' },
+                    { word: 'AMOUR', hint: 'French for love' },
+                    { word: 'ADORE', hint: 'To love deeply' },
+                    { word: 'CHARM', hint: 'Alluring quality' },
+                    { word: 'BLISS', hint: 'Perfect happiness' },
+                    { word: 'DEVOTION', hint: 'Loyal affection' }
+                ];
+                this.currentIndex = 0;
+                this.score = 0;
+                this.timeLeft = 90;
+                this.gameActive = false;
+                this.timer = null;
+                this.solved = new Set();
+                
+                this.scrambledSpan = document.getElementById('scrambledWord');
+                this.input = document.getElementById('scrambleInput');
+                this.hintSpan = document.getElementById('scrambleHint');
+                this.timeSpan = document.getElementById('scrambleTime');
+                this.scoreSpan = document.getElementById('scrambleScore');
+                this.wordsSpan = document.getElementById('scrambleWords');
+                this.startBtn = document.getElementById('scrambleStart');
+                this.resetBtn = document.getElementById('scrambleReset');
+                this.resultDiv = document.getElementById('scrambleResult');
+                this.finalScoreSpan = document.getElementById('scrambleFinalScore');
+                this.finalWordsSpan = document.getElementById('scrambleFinalWords');
+                
+                this.init();
+            }
+            
+            init() {
+                this.startBtn.addEventListener('click', () => this.startGame());
+                this.resetBtn.addEventListener('click', () => this.resetGame());
+                this.input.addEventListener('input', () => this.checkWord());
+            }
+            
+            scrambleWord(word) {
+                let arr = word.split('');
+                for (let i = arr.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
+                return arr.join('') === word ? this.scrambleWord(word) : arr.join('');
+            }
+            
+            startGame() {
+                if (this.gameActive) return;
+                this.gameActive = true;
+                this.currentIndex = 0;
+                this.score = 0;
+                this.timeLeft = 90;
+                this.solved.clear();
+                this.input.disabled = false;
+                this.input.value = '';
+                this.resultDiv.style.display = 'none';
+                this.startBtn.disabled = true;
+                
+                this.timeSpan.textContent = this.timeLeft;
+                this.scoreSpan.textContent = '0';
+                this.wordsSpan.textContent = '0';
+                
+                this.nextWord();
+                
+                this.timer = setInterval(() => {
+                    this.timeLeft--;
+                    this.timeSpan.textContent = this.timeLeft;
+                    if (this.timeLeft <= 0) this.endGame();
+                }, 1000);
+            }
+            
+            nextWord() {
+                if (this.currentIndex >= this.words.length) {
+                    this.endGame();
+                    return;
+                }
+                const wordObj = this.words[this.currentIndex];
+                this.scrambledSpan.textContent = this.scrambleWord(wordObj.word);
+                this.hintSpan.textContent = `Hint: ${wordObj.hint}`;
+                this.input.value = '';
+                this.input.focus();
+            }
+            
+            checkWord() {
+                if (!this.gameActive) return;
+                const typed = this.input.value.toUpperCase();
+                const target = this.words[this.currentIndex].word;
+                if (typed === target) {
+                    this.solved.add(target);
+                    this.score += 100;
+                    this.currentIndex++;
+                    this.scoreSpan.textContent = this.score;
+                    this.wordsSpan.textContent = this.solved.size;
+                    if (this.currentIndex < this.words.length) {
+                        this.nextWord();
+                    } else {
+                        this.endGame();
+                    }
+                }
+            }
+            
+            endGame() {
+                clearInterval(this.timer);
+                this.gameActive = false;
+                this.input.disabled = true;
+                this.startBtn.disabled = false;
+                
+                this.finalScoreSpan.textContent = this.score;
+                this.finalWordsSpan.textContent = this.solved.size;
+                this.resultDiv.style.display = 'block';
+            }
+            
+            resetGame() {
+                clearInterval(this.timer);
+                this.gameActive = false;
+                this.startBtn.disabled = false;
+                this.input.disabled = true;
+                this.timeLeft = 90;
+                this.score = 0;
+                this.currentIndex = 0;
+                this.solved.clear();
+                this.timeSpan.textContent = '90';
+                this.scoreSpan.textContent = '0';
+                this.wordsSpan.textContent = '0';
+                this.scrambledSpan.textContent = '';
+                this.hintSpan.textContent = '';
+                this.resultDiv.style.display = 'none';
+            }
+        }
+
+        // Puzzle Game (Sliding Puzzle)
+        class PuzzleGame {
+            constructor() {
+                this.symbols = ['💍', '💎', '💐', '🌹', '🕯️', '📜', '✒️', '🎭', ''];
+                this.pieces = [...this.symbols];
+                this.moves = 0;
+                this.timeLeft = 120;
+                this.gameActive = false;
+                this.timer = null;
+                this.emptyIndex = 8;
+                
+                this.grid = document.getElementById('puzzleGrid');
+                this.timeSpan = document.getElementById('puzzleTime');
+                this.movesSpan = document.getElementById('puzzleMoves');
+                this.statusSpan = document.getElementById('puzzleStatus');
+                this.startBtn = document.getElementById('puzzleStart');
+                this.resetBtn = document.getElementById('puzzleReset');
+                this.resultDiv = document.getElementById('puzzleResult');
+                this.scoreSpan = document.getElementById('puzzleScore');
+                this.finalTimeSpan = document.getElementById('puzzleFinalTime');
+                this.finalMovesSpan = document.getElementById('puzzleFinalMoves');
+                
+                this.init();
+            }
+            
+            init() {
+                this.createGrid();
+                this.startBtn.addEventListener('click', () => this.startGame());
+                this.resetBtn.addEventListener('click', () => this.resetGame());
+            }
+            
+            createGrid() {
+                this.grid.innerHTML = '';
+                this.pieces.forEach((sym, idx) => {
+                    const piece = document.createElement('div');
+                    piece.className = 'puzzle-piece' + (sym === '' ? ' empty' : '');
+                    piece.textContent = sym;
+                    piece.dataset.index = idx;
+                    piece.addEventListener('click', (e) => this.handleClick(e));
+                    this.grid.appendChild(piece);
+                });
+            }
+            
+            handleClick(e) {
+                if (!this.gameActive) return;
+                const piece = e.currentTarget;
+                if (piece.classList.contains('empty')) return;
+                
+                const idx = parseInt(piece.dataset.index);
+                const adjacent = this.getAdjacentIndices(this.emptyIndex);
+                if (adjacent.includes(idx)) {
+                    // Swap
+                    [this.pieces[idx], this.pieces[this.emptyIndex]] = [this.pieces[this.emptyIndex], this.pieces[idx]];
+                    this.emptyIndex = idx;
+                    this.moves++;
+                    this.movesSpan.textContent = this.moves;
+                    this.updateGrid();
+                    
+                    if (this.checkWin()) this.endGame(true);
+                }
+            }
+            
+            getAdjacentIndices(idx) {
+                const row = Math.floor(idx / 3);
+                const col = idx % 3;
+                const adj = [];
+                if (row > 0) adj.push(idx - 3);
+                if (row < 2) adj.push(idx + 3);
+                if (col > 0) adj.push(idx - 1);
+                if (col < 2) adj.push(idx + 1);
+                return adj;
+            }
+            
+            updateGrid() {
+                const pieces = this.grid.querySelectorAll('.puzzle-piece');
+                pieces.forEach((piece, i) => {
+                    piece.textContent = this.pieces[i];
+                    if (this.pieces[i] === '') {
+                        piece.classList.add('empty');
+                    } else {
+                        piece.classList.remove('empty');
+                    }
+                });
+            }
+            
+            checkWin() {
+                return this.pieces.every((val, idx) => val === this.symbols[idx]);
+            }
+            
+            startGame() {
+                if (this.gameActive) return;
+                this.gameActive = true;
+                this.moves = 0;
+                this.timeLeft = 120;
+                this.emptyIndex = 8;
+                this.pieces = [...this.symbols];
+                this.movesSpan.textContent = '0';
+                this.timeSpan.textContent = '120';
+                this.statusSpan.textContent = 'Solving...';
+                this.resultDiv.style.display = 'none';
+                this.startBtn.disabled = true;
+                
+                // Shuffle
+                for (let i = 0; i < 200; i++) {
+                    const adj = this.getAdjacentIndices(this.emptyIndex);
+                    const randIdx = adj[Math.floor(Math.random() * adj.length)];
+                    [this.pieces[randIdx], this.pieces[this.emptyIndex]] = [this.pieces[this.emptyIndex], this.pieces[randIdx]];
+                    this.emptyIndex = randIdx;
+                }
+                this.updateGrid();
+                
+                this.timer = setInterval(() => {
+                    this.timeLeft--;
+                    this.timeSpan.textContent = this.timeLeft;
+                    if (this.timeLeft <= 0) this.endGame(false);
+                }, 1000);
+            }
+            
+            endGame(success) {
+                clearInterval(this.timer);
+                this.gameActive = false;
+                this.startBtn.disabled = false;
+                this.statusSpan.textContent = success ? 'Solved!' : 'Time\'s Up';
+                
+                let score = success ? Math.max(1500 - (this.timeLeft * 5) - (this.moves * 3), 100) : (120 - this.timeLeft) * 10;
+                this.scoreSpan.textContent = score;
+                this.finalTimeSpan.textContent = 120 - this.timeLeft;
+                this.finalMovesSpan.textContent = this.moves;
+                this.resultDiv.style.display = 'block';
+            }
+            
+            resetGame() {
+                clearInterval(this.timer);
+                this.gameActive = false;
+                this.startBtn.disabled = false;
+                this.moves = 0;
+                this.timeLeft = 120;
+                this.emptyIndex = 8;
+                this.pieces = [...this.symbols];
+                this.movesSpan.textContent = '0';
+                this.timeSpan.textContent = '120';
+                this.statusSpan.textContent = 'Unsolved';
+                this.resultDiv.style.display = 'none';
+                this.updateGrid();
+            }
+        }
+
+        // Initialize games when DOM ready
+        document.addEventListener('DOMContentLoaded', () => {
+            new MemoryGame();
+            new ScrambleGame();
+            new PuzzleGame();
+        });
+    </script>
+</body>
+</html>
